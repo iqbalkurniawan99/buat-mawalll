@@ -128,3 +128,17 @@ button:active {
     0%, 100% { opacity: 0; transform: scale(0); }
     50% { opacity: 1; transform: scale(1.2); }
 }
+
+.content-section {
+    display: none; /* Sembunyikan semua halaman dulu */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    top: 0; left: 0;
+}
+
+.content-section.active {
+    display: flex; /* Tampilkan cuma yang aktif */
+    opacity: 1;
+    position: relative;
+}
