@@ -1,22 +1,28 @@
 const music = document.getElementById('bgMusic');
 
 function mulaiWeb() {
-    if (music) music.play();
+    if (music) {
+        music.play();
+    }
     tampilHal('hal-1');
 }
 
 function tampilHal(idHal) {
-    // Sembunyikan semua halaman
+    // Sembunyikan semua dengan halus
     document.querySelectorAll('.content-section').forEach(section => {
         section.classList.remove('active');
+        section.style.display = 'none';
     });
     
-    // Tampilkan halaman yang dituju
+    // Munculkan target
     const target = document.getElementById(idHal);
-    target.classList.add('active');
+    target.style.display = 'flex';
+    setTimeout(() => {
+        target.classList.add('active');
+    }, 50);
 }
 
-// EFEK PARTIKEL (Tetap Ada)
+// EFEK PARTIKEL
 function createFallingEffect() {
     const symbols = ['🌸', '💗', '✨', '💖', '⭐', '🎀'];
     const el = document.createElement('div');
