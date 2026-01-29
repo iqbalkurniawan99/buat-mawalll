@@ -1,6 +1,50 @@
-// script.js
+const music = document.getElementById('bgMusic');
 
-// 1. Efek Elemen Jatuh (Falling Particles)
+// Fungsi sakti buat maksa lagu jalan di iPhone
+function playMusic() {
+    if (music && localStorage.getItem('musicPlaying') === 'true') {
+        music.play().catch(() => {
+            // Jika diblokir, kita tunggu user klik apa saja di layar
+            document.addEventListener('click', () => {
+                music.play();
+            }, { once: true });
+        });
+    }
+}
+
+// Cek musik setiap kali pindah halaman
+window.addEventListener('load', () => {
+    if (localStorage.getItem('musicPlaying') === 'true' && music) {
+        const savedTime = localStorage.getItem('musicTime');
+        if (savedTime) music.currentTime = savedTime;
+        playMusic();
+    }
+});
+
+// Simpan detik lagu biar nyambung terus
+setInterval(() => {
+    if (music && !music.paused) {
+        localStorage.setItem('musicTime', music.currentTime);
+    }
+}, 500);
+
+function startSurprise() {
+    localStorage.setItem('musicPlaying', 'true');
+    if (music) {
+        music.play().then(() => {
+            window.location.href = 'halaman1.html';
+        }).catch(() => {
+            // Kalau gagal play di awal, tetep pindah halaman
+            window.location.href = 'halaman1.html';
+        });
+    }
+}
+
+function nextHalaman(namaFile) {
+    window.location.href = namaFile;
+}
+
+// --- EFEK PARTIKEL ---
 function createFallingEffect() {
     const symbols = ['🌸', '💗', '✨', '💖', '⭐', '🎀'];
     const el = document.createElement('div');
@@ -15,7 +59,6 @@ function createFallingEffect() {
 }
 setInterval(createFallingEffect, 400);
 
-// 2. Efek Kelap Kelip (Sparkle Stars)
 function createSparkle() {
     const sparkle = document.createElement('div');
     sparkle.classList.add('sparkle');
@@ -29,44 +72,3 @@ function createSparkle() {
     setTimeout(() => { sparkle.remove(); }, 3000);
 }
 setInterval(createSparkle, 150);
-
-// 3. Logika Musik & Navigasi
-const music = document.getElementById('bgMusic');
-
-window.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('musicPlaying') === 'true' && music) {
-        const savedTime = localStorage.getItem('musicTime');
-        if (savedTime) music.currentTime = savedTime;
-        music.play().catch(() => console.log("Menunggu interaksi layar..."));
-    }
-});
-
-setInterval(() => {
-    if (music && !music.paused) {
-        localStorage.setItem('musicTime', music.currentTime);
-    }
-}, 500);
-
-function startSurprise() {
-    localStorage.setItem('musicPlaying', 'true');
-    
-    if (music) {
-        // iPhone butuh trigger play yang kuat sebelum pindah halaman
-        music.play(); 
-        
-        // Kasih jeda 300ms (sekejap mata) biar Safari sempet proses lagunya
-        setTimeout(() => {
-            window.location.href = 'halaman1.html';
-        }, 300);
-    } else {
-        window.location.href = 'halaman1.html';
-    }
-}
-
-function nextHalaman(namaFile) {
-    document.querySelector('.container').style.opacity = '0';
-    document.querySelector('.container').style.transition = '0.4s';
-    setTimeout(() => {
-        window.location.href = namaFile;
-    }, 400);
-}
