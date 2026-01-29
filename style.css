@@ -18,84 +18,82 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Sembunyikan semua section secara default */
 .content-section {
     display: none;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    position: absolute; top: 0; left: 0;
 }
 
-/* Hanya tampilkan yang aktif */
 .content-section.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 20px; width: 100%;
 }
 
+/* FOTO MENGAMBANG */
 .photo-frame {
     width: 70vw; max-width: 250px;
     height: 90vw; max-height: 320px;
     border: 6px solid #ffffff;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(255, 77, 109, 0.3);
-    outline: 2px dashed #ff85a1;
-    outline-offset: 5px;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     background: #fff;
     animation: float 4s ease-in-out infinite;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotate(-1deg); }
-    50% { transform: translateY(-10px) rotate(1deg); }
-}
-
-.photo-frame img { width: 100%; height: 100%; object-fit: cover; }
-
-h1 { font-family: 'Pacifico', cursive; font-size: 1.6rem; margin-bottom: 15px; }
-
-.teks-ucapan {
+/* KOTAK SURAT GLOW PINK & MENGAMBANG */
+.teks-ucapan.glow-box {
     width: 85%; max-width: 350px;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 15px; border-radius: 20px;
-    border: 1px solid #ffccd5;
-    font-size: 0.9rem; font-weight: 700;
-    line-height: 1.5;
-    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px; border-radius: 20px;
+    border: 2px solid #ff85a1;
+    font-size: 0.95rem; font-weight: 700;
+    line-height: 1.6;
+    box-shadow: 0 0 20px rgba(255, 133, 161, 0.5), inset 0 0 10px rgba(255, 133, 161, 0.2);
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 0.5s;
 }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+h1 { font-family: 'Pacifico', cursive; font-size: 1.7rem; margin-bottom: 15px; text-shadow: 2px 2px 0 white; }
 
 .btn-utama {
     background: #ff4d6d; color: white; border: 3px solid #ffffff;
-    padding: 12px 30px; border-radius: 50px; font-weight: bold;
-    margin-top: 35px; /* Jarak tombol */
-    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-    cursor: pointer;
-    z-index: 100;
+    padding: 12px 35px; border-radius: 50px; font-weight: bold;
+    margin-top: 40px; box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
+    cursor: pointer; z-index: 100;
 }
 
-.btn-utama:active { transform: scale(0.9); }
+/* EFEK DUAR */
+#surprise-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 999;
+}
 
-/* HIASAN SUDUT */
+.duar-particle {
+    position: absolute; font-size: 2rem; font-weight: bold;
+    color: #ff4d6d; text-shadow: 0 0 10px white;
+    animation: duarAnim 1s ease-out forwards;
+}
+
+@keyframes duarAnim {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--tr)); opacity: 0; }
+}
+
 .corner-deco {
-    position: fixed; width: 60px; height: 60px;
-    z-index: 50; pointer-events: none;
-    font-size: 40px; display: flex;
-    justify-content: center; align-items: center;
-    transition: opacity 0.5s;
+    position: fixed; width: 60px; height: 60px; z-index: 50;
+    font-size: 45px; display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.5s; filter: drop-shadow(0 0 5px pink);
 }
-.top-left { top: 10px; left: 10px; }
-.top-right { top: 10px; right: 10px; }
-.bottom-left { bottom: 10px; left: 10px; }
-.bottom-right { bottom: 10px; right: 10px; }
+.top-left { top: 15px; left: 15px; } .top-right { top: 15px; right: 15px; }
+.bottom-left { bottom: 15px; left: 15px; } .bottom-right { bottom: 15px; right: 15px; }
