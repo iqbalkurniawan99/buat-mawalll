@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&family=Quicksand:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap');
 
 * {
     margin: 0; padding: 0; box-sizing: border-box;
@@ -24,121 +24,93 @@ body {
     height: 100vh; width: 100%;
     display: flex; flex-direction: column;
     justify-content: center; align-items: center;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
-    position: relative;
-    z-index: 10;
+    position: absolute;
+    top: 0; left: 0;
 }
 
-/* Bingkai Foto Spektakuler */
+/* Animasi Masuk Konten */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.content-section.active > * {
+    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Delay tiap elemen biar estetik */
+.content-section.active .photo-frame { animation-delay: 0.2s; }
+.content-section.active h1 { animation-delay: 0.4s; }
+.content-section.active .teks-ucapan { animation-delay: 0.6s; }
+.content-section.active button { animation-delay: 0.8s; }
+
 .photo-frame {
-    width: 75vw; max-width: 250px;
-    height: 95vw; max-height: 330px;
+    width: 70vw; max-width: 250px;
+    height: 85vw; max-height: 320px;
     border: 6px solid #ffffff;
-    border-radius: 30px;
+    border-radius: 20px;
     box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2);
-    outline: 3px dashed #ff85a1;
+    outline: 2px dashed #ff85a1;
     outline-offset: 5px;
     overflow: hidden;
     margin-bottom: 20px;
-    animation: float 5s ease-in-out infinite;
-    position: relative;
     background: #fff;
+    animation: float 4s ease-in-out infinite;
 }
-
-/* Bintang Pink di Bingkai */
-.photo-frame::before, .photo-frame::after {
-    content: '⭐';
-    position: absolute; font-size: 22px; z-index: 10;
-    filter: drop-shadow(0 0 3px #ff4d6d);
-}
-.photo-frame::before { top: 5px; left: 5px; }
-.photo-frame::after { bottom: 5px; right: 5px; }
 
 @keyframes float {
     0%, 100% { transform: translateY(0) rotate(-1deg); }
     50% { transform: translateY(-10px) rotate(1deg); }
 }
 
-.photo-frame img {
-    width: 100%; height: 100%; object-fit: cover;
-}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; }
 
 h1 {
     font-family: 'Pacifico', cursive;
-    font-size: 1.7rem;
-    color: #ff4d6d;
-    text-shadow: 2px 2px 0 #fff;
+    font-size: 1.8rem;
     margin-bottom: 10px;
+    text-shadow: 2px 2px 0 white;
 }
 
 .teks-ucapan {
-    width: 90%;
-    background: rgba(255, 255, 255, 0.85);
+    width: 90%; max-width: 400px;
+    background: rgba(255, 255, 255, 0.8);
     padding: 15px;
-    border-radius: 20px;
-    border: 2px solid #ffccd5;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: #ff4d6d;
-    font-weight: 600;
+    border-radius: 15px;
+    border: 1px solid #ffccd5;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-weight: 700;
 }
 
 button {
     background: #ff4d6d;
     color: white;
     border: 3px solid #ffffff;
-    padding: 12px 30px;
+    padding: 12px 35px;
     border-radius: 50px;
     font-weight: bold;
     font-size: 1rem;
-    margin-top: 15px;
+    margin-top: 20px;
     box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-button:active {
-    transform: scale(0.9);
-}
+button:hover { transform: scale(1.05); background: #ff3358; }
+button:active { transform: scale(0.9); }
 
-/* Partikel Falling */
-.flower-love {
-    position: fixed; top: -50px; z-index: 5;
-    pointer-events: none;
-    animation: falling linear forwards;
-}
+.content-section { display: none; opacity: 0; }
+.content-section.active { display: flex; opacity: 1; }
 
-@keyframes falling {
-    to { transform: translateY(110vh) rotate(360deg); }
-}
+/* Kelopak Bunga & Bintang */
+.flower-love { position: fixed; top: -50px; z-index: 5; pointer-events: none; animation: falling linear forwards; }
+@keyframes falling { to { transform: translateY(110vh) rotate(360deg); } }
 
-/* Kelap Kelip Sparkle */
 .sparkle {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    pointer-events: none;
-    box-shadow: 0 0 10px 2px rgba(255, 77, 109, 0.8);
-    animation: twinkle var(--d) linear infinite;
-    z-index: 1;
+    position: absolute; background: white; border-radius: 50%;
+    box-shadow: 0 0 10px white; animation: twinkle var(--d) linear infinite;
 }
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0; transform: scale(0); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
-
-.content-section {
-    display: none; /* Sembunyikan semua halaman dulu */
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    position: absolute;
-    top: 0; left: 0;
-}
-
-.content-section.active {
-    display: flex; /* Tampilkan cuma yang aktif */
-    opacity: 1;
-    position: relative;
-}
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0); } 50% { opacity: 1; transform: scale(1); } }
