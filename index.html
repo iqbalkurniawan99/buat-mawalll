@@ -7,16 +7,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-      <img src="https://api.iconify.design/fluent-emoji:love-letter.svg" style="width: 90px; margin-bottom: 20px; filter: drop-shadow(0 0 5px rgba(255,77,109,0.3));">
+    <div id="hal-awal" class="container content-section active">
+        <img src="https://api.iconify.design/fluent-emoji:love-letter.svg" style="width: 90px; margin-bottom: 20px;">
         <h1>Halo, Mawar! 🎀</h1>
-        <div class="teks-ucapan">
-            Ada sesuatu yang spesial buat kamu yang lagi ulang tahun ke-18...
-        </div>
-        <button onclick="startSurprise()">Buka Sekarang ✨</button>
+        <div class="teks-ucapan">Ada sebuah surat spesial buat kamu yang lagi ulang tahun ke-18...</div>
+        <button onclick="mulaiWeb()">Buka Surat ✨</button>
     </div>
-   <audio id="bgMusic" src="lagu.mp3" loop preload="auto" playsinline></audio>
+
+    <div id="hal-1" class="container content-section">
+        <div class="photo-frame"><img src="foto1.jpg"></div>
+        <h1>Selamat Ultah! 🎂</h1>
+        <div class="teks-ucapan">"Selamat ulang tahun ke-18 ya Mawar! Semoga harimu selalu penuh warna."</div>
+        <button onclick="tampilHal('hal-2')">Lanjut ➔</button>
+    </div>
+
+    <div id="hal-2" class="container content-section">
+        <div class="photo-frame"><img src="foto2.jpg"></div>
+        <h1>Stay Cute! ✨</h1>
+        <div class="teks-ucapan">"Tetap jadi orang yang baik dan ceria ya! Kamu itu berharga banget."</div>
+        <button onclick="tampilHal('hal-3')">Lanjut ➔</button>
+    </div>
+
+    <div id="hal-3" class="container content-section">
+        <div class="photo-frame"><img src="foto3.jpg"></div>
+        <h1>Dream Big 🌸</h1>
+        <div class="teks-ucapan">"Semoga semua impian kamu di umur 18 ini bisa tercapai satu per satu!"</div>
+        <button onclick="tampilHal('hal-4')">Lanjut ➔</button>
+    </div>
+
+    <div id="hal-4" class="container content-section">
+        <div class="photo-frame"><img src="foto4.jpg"></div>
+        <h1>Be Happy! 💖</h1>
+        <div class="teks-ucapan">"Jangan lupa bahagia hari ini dan seterusnya. Senyum kamu itu kuncinya!"</div>
+        <button onclick="tampilHal('hal-final')">Terakhir ➔</button>
+    </div>
+
+    <div id="hal-final" class="container content-section">
+        <img src="https://api.iconify.design/noto:cherry-blossom.svg" style="width: 60px;">
+        <h1>Happy 18th Birthday, Mawar! 🎂</h1>
+        <div class="teks-ucapan">"Wkwkwk 18 juga nih kamu. Semoga harimu indah, masa depanmu cerah, dan bahagia terus ya, Mawar! ✨"</div>
+        <button onclick="location.reload()">Ulang Lagi 🔄</button>
+    </div>
+
+    <audio id="bgMusic" src="lagu.mp3" loop preload="auto" playsinline></audio>
     <script src="script.js"></script>
 </body>
 </html>
-
