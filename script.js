@@ -49,8 +49,18 @@ setInterval(() => {
 
 function startSurprise() {
     localStorage.setItem('musicPlaying', 'true');
-    if (music) music.play();
-    window.location.href = 'halaman1.html';
+    
+    if (music) {
+        // iPhone butuh trigger play yang kuat sebelum pindah halaman
+        music.play(); 
+        
+        // Kasih jeda 300ms (sekejap mata) biar Safari sempet proses lagunya
+        setTimeout(() => {
+            window.location.href = 'halaman1.html';
+        }, 300);
+    } else {
+        window.location.href = 'halaman1.html';
+    }
 }
 
 function nextHalaman(namaFile) {
