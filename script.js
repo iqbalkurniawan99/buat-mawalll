@@ -1,50 +1,22 @@
 const music = document.getElementById('bgMusic');
 
-// Fungsi sakti buat maksa lagu jalan di iPhone
-function playMusic() {
-    if (music && localStorage.getItem('musicPlaying') === 'true') {
-        music.play().catch(() => {
-            // Jika diblokir, kita tunggu user klik apa saja di layar
-            document.addEventListener('click', () => {
-                music.play();
-            }, { once: true });
-        });
-    }
+function mulaiWeb() {
+    if (music) music.play();
+    tampilHal('hal-1');
 }
 
-// Cek musik setiap kali pindah halaman
-window.addEventListener('load', () => {
-    if (localStorage.getItem('musicPlaying') === 'true' && music) {
-        const savedTime = localStorage.getItem('musicTime');
-        if (savedTime) music.currentTime = savedTime;
-        playMusic();
-    }
-});
-
-// Simpan detik lagu biar nyambung terus
-setInterval(() => {
-    if (music && !music.paused) {
-        localStorage.setItem('musicTime', music.currentTime);
-    }
-}, 500);
-
-function startSurprise() {
-    localStorage.setItem('musicPlaying', 'true');
-    if (music) {
-        music.play().then(() => {
-            window.location.href = 'halaman1.html';
-        }).catch(() => {
-            // Kalau gagal play di awal, tetep pindah halaman
-            window.location.href = 'halaman1.html';
-        });
-    }
+function tampilHal(idHal) {
+    // Sembunyikan semua halaman
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Tampilkan halaman yang dituju
+    const target = document.getElementById(idHal);
+    target.classList.add('active');
 }
 
-function nextHalaman(namaFile) {
-    window.location.href = namaFile;
-}
-
-// --- EFEK PARTIKEL ---
+// EFEK PARTIKEL (Tetap Ada)
 function createFallingEffect() {
     const symbols = ['🌸', '💗', '✨', '💖', '⭐', '🎀'];
     const el = document.createElement('div');
